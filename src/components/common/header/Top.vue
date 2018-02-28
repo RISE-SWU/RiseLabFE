@@ -4,11 +4,11 @@
             <div class="nav-top col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <ul class="text-right  navbar-btn">
                     <li>
-                        <a href="#/article?id=39">Contact</a>
+                        <a href="/article?id=39">Contact</a>
                         <span>|</span>
                     </li>
                     <li>
-                        <a href="#/article?id=28">About Us</a>
+                        <a href="/article?id=28">About Us</a>
                         <span>|</span>
                     </li>
                     <li class="dropdown">
@@ -23,7 +23,7 @@
 </template>
 <script>
     export default {
-        name: 'RiseHeader',
+        name: 'RiseTop',
         data() {
             return {}
         }
@@ -31,14 +31,14 @@
 </script>
 
 <style lang="scss">
-    @import '../../scss/color';
-    @import '../../scss/media';
+    @import '../../../scss/color';
+    @import '../../../scss/media';
 
     .container-fluid {
         .nav-top {
             color:$white-basic;
             height:40px;
-            background-image: url(../../image/banner.png);
+            background-image: url(../../../image/banner.png);
 
             ul {
                 list-style-type:none;

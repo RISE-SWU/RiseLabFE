@@ -1,28 +1,40 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <container>
+          <div slot="header">
+              <rise-header></rise-header>
+          </div>
+          <div slot="content" class="content">
+              <router-view></router-view>
+          </div>
+          <rise-footer slot="footer"></rise-footer>
+      </container>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Container from './components/common/Container'
+import RiseHeader from './components/common/Header'
+import RiseFooter from './components/common/Footer'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+      RiseFooter,
+      Container,
+      RiseHeader
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss"
+            scoped>
+    @import "scss/color";
+    .content {
+        background-color: $bg-color;
+        padding: 0 15px;
+        @media (max-width: 1249px) {
+            padding: 0;
+        }
+    }
 </style>
