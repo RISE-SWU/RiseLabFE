@@ -13,7 +13,6 @@ export function getIndexInfor() {
 }
 
 //菜单文章列表
-
 export function getList(item) {
     switch (item) {
         case 'seminar':
@@ -71,7 +70,6 @@ export function getArticle(id) {
 }
 
 //获取people列表
-
 export function getPeopleList() {
     return new Promise((resolve)=> {
         const staff = axios.get(`${path}staff/zxjs`);
@@ -81,13 +79,53 @@ export function getPeopleList() {
             const staff = res[0].data.filter(item => { return item.class == 'zxjs'});
             const ap = res[0].data.filter(item => { return item.class == 'jzjs'});
             resolve([
-                { class: 'Staff', list:  staff },
-                { class: 'Adjunct Professors', list: ap },
-                { class: 'Postgraduate Students', list: res[1].data },
-                { class: 'Undergraduates', list: res[2].data }
+                { class: 'Staff', list: staff, type: 'teacher' },
+                { class: 'Adjunct Professors', list: ap, type: 'teacher' },
+                { class: 'Postgraduate Students', list: res[1].data, type:'student'},
+                { class: 'Undergraduates', list: res[2].data, type: 'student'}
             ])
         }))
     })
+}
 
+//获取个人信息详情
+export function getPeopleDetail(item, id) {
+    return new Promise((resolve)=> {
+        axios.get(`${path}member/${item}/${id}`).then(res => {
+            const rs = res.data[0];
+            resolve({
+                basic: rs,
+                detail: combineInfo(rs)
+            })
+        })
+    })
 
+}
+
+function combineInfo(rs) {
+    if(typeof rs === 'object'){
+        const detail={};
+        if(rs.introduce) {
+            detail['Biography'] = rs.introduce;
+        }
+        if(rs.intersting) {
+            detail['Research interest'] = rs.intersting;
+        }
+        if(rs.project) {
+            detail['Projects'] = rs.project;
+        }
+        if(rs.achevement) {
+            detail['Achievements'] = rs.achevement;
+        }
+        if(rs.activity) {
+            detail['Professional Activities'] = rs.activity;
+        }
+        if(rs.papers) {
+            detail['Selected Publications'] = rs.papers;
+        }
+        if(rs.report) {
+            detail['Thesis&Reports'] = rs.report;
+        }
+        return detail;
+    }
 }

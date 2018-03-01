@@ -9,10 +9,16 @@
                         <div class="people-display">
                             <div class="people-item" v-for="(people,num) in item.list" :key="num">
                                 <div class="image" >
-                                    <img ref="images" :data-src="people.img"/>
+                                    <a :href="`/peopleInfo/${item.type}?id=${people.id}`">
+                                        <img ref="images" :data-src="people.img"/>
+                                    </a>
                                 </div>
                                 <div class="info">
-                                    <p class="name"><span>{{people.name}}</span>-{{people.degree}}</p>
+                                    <p class="name">
+                                        <a :href="`/peopleInfo/${item.type}?id=${people.id}`">
+                                        <span>{{people.name}}</span>
+                                        </a><span v-if="people.degree">-</span>{{people.degree}}
+                                    </p>
                                     <p class="position">{{people.position}}</p>
                                     <p class="title">{{people.title}}</p>
                                     <p class="address" v-show="people.office">O: {{people.office}}</p>
@@ -42,6 +48,11 @@
 
             }
         },
+        watch: {
+            '$route' () {
+                this.updateData();
+            }
+        },
         created() {
             const people = sessionStorage.getItem('_peopleList');
             if(!people) {
@@ -64,17 +75,35 @@
         },
         mounted() {
             const io = new IntersectionObserver((entries)=>{
-                const ele = entries[0].target;
-                if(!ele.getAttribute('src')){
-                    ele.setAttribute('src', ele.getAttribute('data-src'));
+                if(entries.length <= 2){
+                    entries.forEach(i => {
+                        const ele = i.target;
+                        if(!ele.getAttribute('src')){
+                            ele.setAttribute('src', ele.getAttribute('data-src'));
+                        } else {
+                            io.unobserve(ele);
+                        }
+                    })
                 }
-                console.log(entries[0].target.getAttribute('data-src'))
+            },{
+                threshold: [0.3]
             });
-            for(let i of this.$refs.images){
-                io.observe(i)
-            }
 
-
+            const timer = setInterval(()=> {
+                if(this.$refs.images){
+                    const deviceHeight = document.documentElement.clientHeight;
+                    const list = this.$refs.images;
+                    list.forEach((item) => {
+                        const itemHeight = item.getBoundingClientRect().top;
+                        if(itemHeight < deviceHeight){
+                            item.setAttribute('src', item.getAttribute('data-src'));
+                        } else {
+                            io.observe(item)
+                        }
+                    });
+                    clearInterval(timer);
+                }
+            },1)
         }
     }
 </script>
@@ -137,7 +166,6 @@
                             color: $theme-color;
                             font-weight: bold;
                         }
-
                     }
                 }
             }

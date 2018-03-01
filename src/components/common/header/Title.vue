@@ -26,6 +26,11 @@
         @media (max-width: 1249px) {
             padding: 0;
         }
+        @media #{$large-screen} {
+            width: 1250px;
+            margin: 0 auto;
+            padding: 0;
+        }
     }
     .rise-title {
         text-align:center;

@@ -54,6 +54,12 @@
         @media (max-width: 1249px) {
             padding: 0;
         }
+        @media #{$large-screen} {
+            width: 1250px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
         .navbar {
             border-radius: 0;
             border: none;
