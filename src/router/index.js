@@ -9,7 +9,7 @@ import PeopleInfo from '../pages/people.vue';
 Vue.use(Router)
 
 export default new Router({
-  mode:'history',
+  mode:'hash',
   routes: [
       {
           path: '/',
@@ -35,6 +35,9 @@ export default new Router({
           path: '/peopleInfo/:type',
           name: 'peopleInfo',
           component: PeopleInfo
+      },
+      {
+          path:'*'
       }
   ]
 })

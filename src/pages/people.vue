@@ -21,9 +21,9 @@
                     <div class="info-research">
                         <p v-if="this.$route.params.type==='student'"><strong>Supervisor：</strong></p>
                         <p v-if="this.$route.params.type==='student'">
-                            <a :href="`/peopleInfo/teacher/?id=${peopleInfo.basic.supervisorId}`">
+                            <router-link :to="{path:'/peopleInfo/teacher',query:{id: peopleInfo.basic.supervisorId}}">
                                 {{peopleInfo.basic.supervisor}}
-                            </a>
+                            </router-link>
                         </p>
                         <p><strong>Research Area：</strong></p>
                         <p>{{peopleInfo.basic.area}}{{peopleInfo.basic.field}}</p>
@@ -32,11 +32,11 @@
                 </div>
                 <div class="button-group" v-if="Object.keys(peopleInfo.detail).length >3">
                     <el-button-group>
-                        <el-button  v-for="(v,k) in peopleInfo.detail" size="medium"><a :href="`#${k}`">{{k}}</a></el-button>
+                        <el-button  :key="k" v-for="(v,k) in peopleInfo.detail" size="medium"><a :href="`#${k}`">{{k}}</a></el-button>
                     </el-button-group>
                 </div>
                 <div class="info-detail">
-                    <div v-for="(v,k) in peopleInfo.detail" class="detail-group">
+                    <div v-for="(v,k) in peopleInfo.detail" :key="v" class="detail-group">
                         <div :id="k" class="detail-title">{{k}}</div><hr />
                         <div class="detail-content" v-html="v"></div>
                     </div>
@@ -47,7 +47,8 @@
 </template>
 
 <script>
-    import { getPeopleDetail } from '../lib/http'
+    import { getPeopleDetail } from '../lib/http';
+    import { setTitle } from '../lib/convert';
     export default {
         name: 'peopleInfo',
         data() {
@@ -59,12 +60,21 @@
                 }
             }
         },
+        watch: {
+            '$route' (to, from) {
+                if(to.params.type !==from.params.type) {
+                    location.reload();
+                }
+            }
+        },
         created() {
+
             const type = this.$route.params.type;
             const id = this.$route.query.id;
             const peopleDetail = sessionStorage.getItem(`_peopleDetail_${type}_${id}`);
             if(!peopleDetail) {
                 getPeopleDetail(type, id).then((res)=> {
+                    setTitle(`${res.basic.name} | RISE`)
                     this.peopleInfo = res;
                     this.loading = false;
                     sessionStorage.setItem(`_peopleDetail_${type}_${id}`,JSON.stringify(res));

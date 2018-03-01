@@ -9,15 +9,18 @@
                         <div class="people-display">
                             <div class="people-item" v-for="(people,num) in item.list" :key="num">
                                 <div class="image" >
-                                    <a :href="`/peopleInfo/${item.type}?id=${people.id}`">
+                                    <router-link :to="{ path: `/peopleInfo/${item.type}`,
+                                                        query: {id: people.id} }">
                                         <img ref="images" :data-src="people.img"/>
-                                    </a>
+                                    </router-link>
                                 </div>
                                 <div class="info">
                                     <p class="name">
-                                        <a :href="`/peopleInfo/${item.type}?id=${people.id}`">
-                                        <span>{{people.name}}</span>
-                                        </a><span v-if="people.degree">-</span>{{people.degree}}
+                                        <router-link :to="{ path: `/peopleInfo/${item.type}`,
+                                                        query: {id: people.id} }">
+                                            <span>{{people.name}}</span>
+                                        </router-link>
+                                        <span v-if="people.degree">-</span>{{people.degree}}
                                     </p>
                                     <p class="position">{{people.position}}</p>
                                     <p class="title">{{people.title}}</p>
@@ -36,7 +39,7 @@
 <script>
     import 'intersection-observer';
     import { getPeopleList }  from '../lib/http';
-    import { convert } from '../lib/convert';
+    import { convert, setTitle } from '../lib/convert';
 
     export default {
         name: 'peopleList',
@@ -55,6 +58,7 @@
         },
         created() {
             const people = sessionStorage.getItem('_peopleList');
+            setTitle('People | RISE')
             if(!people) {
                 getPeopleList().then(res => {
                     this.loading = false;

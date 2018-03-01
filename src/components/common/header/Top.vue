@@ -4,11 +4,15 @@
             <div class="nav-top col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <ul class="text-right  navbar-btn">
                     <li>
-                        <a href="/article?id=39">Contact</a>
+                        <router-link :to="{path: '/article?id=39'}">
+                            Contact
+                        </router-link>
                         <span>|</span>
                     </li>
                     <li>
-                        <a href="/article?id=28">About Us</a>
+                        <router-link :to="{path: '/article?id=28'}">
+                            About Us
+                        </router-link>
                         <span>|</span>
                     </li>
                     <li class="dropdown">
