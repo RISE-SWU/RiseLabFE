@@ -41,7 +41,7 @@ npm run build
 * :cry: 现在仍然无法实现项目的持续集成，已经加到toDoList上了
 
 ## toDoList
-* :sweat_smile: 项目持续集成，准备另开一个项目
+* 项目持续集成，准备另开一个项目
 * Api 进一步规范化，减少前端不必要的封装
 * 剔除所有的Bootstrap样式
 * 返回顶部按钮
