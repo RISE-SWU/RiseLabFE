@@ -1,5 +1,5 @@
 # Rise_Refactor
- <p align="center"><a href="http://www.swu-rise.net.cn/dist" target="_blank">
+ <p align="center"><a href="http://www.swu-rise.net.cn/" target="_blank">
    <img width="100" src="http://www.swu-rise.net.cn/images/logo.png" alt="Vue logo"></a></p>
  
  ## require
@@ -45,8 +45,8 @@
  ## toDoList
  * 项目持续集成，准备另开一个项目
  * Api 进一步规范化，减少前端不必要的封装
-+* Conference页面的api暂时短缺
-+* 文章列表增加type字段，表明当前跳转属于哪一种方式
+ * <del>Conference页面的api暂时短缺</del>
+ * <del>文章列表增加type字段，表明当前跳转属于哪一种方式</del>
  * 剔除所有的Bootstrap样式
  * 返回顶部按钮
  * 使用 graphql 重写api
