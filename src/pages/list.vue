@@ -21,8 +21,8 @@
                                                 <span class="date-device">
                                                     <i>{{scope.row.createDate}}</i>
                                                 </span>
-                                                <router-link v-if="scope.row.type !== 1" :to="{path:'/article',query:{id:scope.row.id}}">{{scope.row.title}}</router-link>
-                                                <a :href="scope.row.url" v-if="scope.row.type == 1">{{scope.row.title}}</a>
+                                                <router-link v-if="scope.row.type !== 'jump'" :to="{path:'/article',query:{id:scope.row.id}}">{{scope.row.title}}</router-link>
+                                                <a :href="scope.row.url" v-if="scope.row.type === 'jump'">{{scope.row.title}}</a>
                                             </span>
                                             </el-tooltip>
                                         </div>

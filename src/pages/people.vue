@@ -78,9 +78,7 @@
                     this.peopleInfo = res;
                     this.loading = false;
                     sessionStorage.setItem(`_peopleDetail_${type}_${id}`,JSON.stringify(res));
-                    console.log(sessionStorage.getItem(`_peopleDetail_${type}_${id}`));
-                    console.log(this.peopleInfo)
-                }).catch(err => {
+                    }).catch(err => {
                     this.$message({
                         type: 'error',
                         message :'http error' + err

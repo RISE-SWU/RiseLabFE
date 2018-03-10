@@ -50,8 +50,8 @@ export function getList(item) {
         case 'conference':
             return new Promise((resolve)=> {
                 const conference = axios.get(`${path}list/xshy`);
-                const domestic = axios.get(`${path}list/xsjl/sublist/gnhy`);
-                const foreign = axios.get(`${path}list/xsjl/sublist/gjhy`);
+                const domestic = axios.get(`${path}list/xshy/sublist/gnhy`);
+                const foreign = axios.get(`${path}list/xshy/sublist/gjhy`);
                 Promise.all([conference, domestic, foreign]).then(res => {
                     resolve([
                         { title: 'Conference', tableData: res[0].data },
