@@ -10,7 +10,7 @@
  * :running: elementUi
  * :person_frowning: vue-router
  * :smiley_cat: Bootstrap
- * ::heartpulse: webpack
+ * :heartpulse: webpack
  
  ## feature
  * :smile: 组件化
@@ -19,9 +19,9 @@
  * :chicken: 删除了一些无用的样式
  * :sparkles: 公共样式统一管理
  * :fire: 增加了api请求时的loading效果
-+* :muscle: 现在可以把过长的标题隐藏
+ * :muscle: 现在可以把过长的标题隐藏
  * :punch: api请求统一管理
-+* :dancers: 文章模板增加了一种点击标题直接跳转到另外一个页面的功能，需要后端配合
+ * :dancers: 文章模板增加了一种点击标题直接跳转到另外一个页面的功能，需要后端配合
  
  ## start
  * :wink: install
