@@ -75,14 +75,24 @@ export function getPeopleList() {
         const staff = axios.get(`${path}staff/zxjs`);
         const ps = axios.get(`${path}staff/zxxsMD`);
         const us = axios.get(`${path}staff/zxxsU`);
-        Promise.all([staff, ps, us]).then((res=> {
+        const former = axios.get(`${path}staff/resignation`);
+        const graduate = axios.get(`${path}staff/graduate`);
+        Promise.all([staff, ps, us, former, graduate]).then((res=> {
             const staff = res[0].data.filter(item => { return item.class == 'zxjs'});
             const ap = res[0].data.filter(item => { return item.class == 'jzjs'});
+            const temp =[];
+            if(res[3].data.length) {
+                temp.push({ class: 'Former Members', list: res[3].data, type: 'teacher'})
+            }
+            if(res[4].data.length) {
+                temp.push({ class: 'Graduate Students', list: res[4].data, type: 'student'})
+            }
             resolve([
                 { class: 'Staff', list: staff, type: 'teacher' },
                 { class: 'Adjunct Professors', list: ap, type: 'teacher' },
                 { class: 'Postgraduate Students', list: res[1].data, type:'student'},
-                { class: 'Undergraduates', list: res[2].data, type: 'student'}
+                { class: 'Undergraduates', list: res[2].data, type: 'student'},
+                ...temp
             ])
         }))
     })
