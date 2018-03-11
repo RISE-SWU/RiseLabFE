@@ -49,6 +49,6 @@
  * <del>文章列表增加type字段，表明当前跳转属于哪一种方式</del>
  * 剔除所有的Bootstrap样式
  * 返回顶部按钮
- * 使用 graphql 重写api
+ * <del>使用 graphql 重写api</del>,具体内容访问这个Rep=><strong><a href="https://github.com/xiaoSais/Graphql_RISE">GraqpQL for Rise</a></strong>
  * 修改出现的一些小bug
  * 解决vue-router的hash模式导致地址出现'#',history模式又不能通过网址直接访问页面的问题
